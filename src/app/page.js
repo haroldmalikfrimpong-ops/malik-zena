@@ -247,27 +247,34 @@ function MemoriesPage({ t, dark, isAdmin }) {
     return new Promise((resolve) => {
       const isVideo = file.type.startsWith("video/");
       if (isVideo) {
-        // For videos: extract compressed thumbnail frame
-        const video = document.createElement("video");
-        video.preload = "auto";
-        video.muted = true;
-        video.playsInline = true;
-        const r = new FileReader();
-        r.onload = ev => {
-          video.onloadeddata = () => {
-            video.currentTime = 0.5;
+        // For videos: try to extract a frame, fallback to placeholder
+        try {
+          const video = document.createElement("video");
+          video.preload = "auto";
+          video.muted = true;
+          video.playsInline = true;
+          const timeout = setTimeout(() => {
+            resolve({ src: null, type: "photo", wasVideo: true, failed: true });
+          }, 5000);
+          const r = new FileReader();
+          r.onload = ev => {
+            video.onloadeddata = () => { video.currentTime = 0.5; };
+            video.onseeked = () => {
+              clearTimeout(timeout);
+              const canvas = document.createElement("canvas");
+              let w = video.videoWidth, h = video.videoHeight;
+              if (w > 480) { h = (h * 480) / w; w = 480; }
+              canvas.width = w; canvas.height = h;
+              canvas.getContext("2d").drawImage(video, 0, 0, w, h);
+              resolve({ src: canvas.toDataURL("image/jpeg", 0.5), type: "photo", wasVideo: true });
+            };
+            video.onerror = () => { clearTimeout(timeout); resolve({ src: null, type: "photo", wasVideo: true, failed: true }); };
+            video.src = ev.target.result;
           };
-          video.onseeked = () => {
-            const canvas = document.createElement("canvas");
-            let w = video.videoWidth, h = video.videoHeight;
-            if (w > 480) { h = (h * 480) / w; w = 480; }
-            canvas.width = w; canvas.height = h;
-            canvas.getContext("2d").drawImage(video, 0, 0, w, h);
-            resolve({ src: canvas.toDataURL("image/jpeg", 0.5), type: "photo", wasVideo: true });
-          };
-          video.src = ev.target.result;
-        };
-        r.readAsDataURL(file);
+          r.readAsDataURL(file);
+        } catch(e) {
+          resolve({ src: null, type: "photo", wasVideo: true, failed: true });
+        }
         return;
       }
       // Compress image
@@ -282,6 +289,7 @@ function MemoriesPage({ t, dark, isAdmin }) {
           canvas.getContext("2d").drawImage(img, 0, 0, w, h);
           resolve({ src: canvas.toDataURL("image/jpeg", quality), type: "photo" });
         };
+        img.onerror = () => resolve({ src: null, type: "photo", failed: true });
         img.src = ev.target.result;
       };
       r.readAsDataURL(file);
@@ -292,11 +300,15 @@ function MemoriesPage({ t, dark, isAdmin }) {
     const files = Array.from(e.target.files); if (!files.length) return;
     const loaded = [];
     for (const file of files) {
-      const result = await compressImage(file);
-      const name = file.name.replace(/\.[^.]+$/, "").replace(/[-_]/g, " ");
-      loaded.push({ src: result.src, caption: result.wasVideo ? name + " (video frame)" : name, type: "photo" });
+      try {
+        const result = await compressImage(file);
+        if (result.src && !result.failed) {
+          const name = file.name.replace(/\.[^.]+$/, "").replace(/[-_]/g, " ");
+          loaded.push({ src: result.src, caption: result.wasVideo ? name + " (video)" : name, type: "photo" });
+        }
+      } catch(err) { console.log("Skip file:", err); }
     }
-    setPending(loaded); setShowModal(true);
+    if (loaded.length > 0) { setPending(loaded); setShowModal(true); }
     e.target.value = "";
   };
 
@@ -357,7 +369,7 @@ function MemoriesPage({ t, dark, isAdmin }) {
         <div style={{ fontSize: "2rem", marginBottom: 8 }}>📸</div>
         <div style={{ fontFamily: "'Playfair Display',serif", fontSize: "1.2rem", color: t.text, marginBottom: 4 }}>Add New Memories</div>
         <div style={{ fontSize: "0.85rem", color: t.textMuted, fontStyle: "italic" }}>Upload photos & videos → pick a country → auto-pinned to the map</div>
-        <input ref={fileRef} type="file" multiple accept="image/*,video/*" style={{ display: "none" }} onChange={handleFiles} />
+        <input ref={fileRef} type="file" multiple accept="image/*" style={{ display: "none" }} onChange={handleFiles} />
       </div>
 
       {visited.length > 0 && (
@@ -457,7 +469,7 @@ function MemoriesPage({ t, dark, isAdmin }) {
             </div>
             <div style={{ display: "flex", gap: 8, justifyContent: "flex-end" }}>
               <button onClick={() => { setShowModal(false); setPending([]); setSelectedCountry(null); }} style={{ padding: "8px 20px", background: "transparent", border: "1px solid " + t.textMuted, borderRadius: 4, color: t.textMuted, cursor: "pointer" }}>Cancel</button>
-              <button onClick={handlePinClick} disabled={!selectedCountry} style={{ padding: "8px 20px", background: selectedCountry ? t.gold : t.gold + "40", color: "#0a0a0a", border: "none", borderRadius: 4, cursor: selectedCountry ? "pointer" : "not-allowed", fontWeight: 600 }}>Next</button>
+              <button onClick={handlePinClick} disabled={!selectedCountry} style={{ padding: "8px 20px", background: selectedCountry ? t.gold : t.gold + "40", color: "#0a0a0a", border: "none", borderRadius: 4, cursor: selectedCountry ? "pointer" : "not-allowed", fontWeight: 600 }}>{selectedCountry ? "Pin to " + selectedCountry : "Select a country"}</button>
             </div>
           </div>
         </div>
