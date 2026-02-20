@@ -12,6 +12,57 @@ const HERO_IMG = "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA4KCw0
 const statusColors = { planned: "#c4787a", "in-progress": "#c9a96e", secured: "#8fb58f" };
 const statusLabels = { planned: "Planned", "in-progress": "In Progress", secured: "Secured ✓" };
 
+
+// ===== LOGIN SCREEN =====
+function LoginScreen({ onLogin }) {
+  const [pw, setPw] = useState("");
+  const [error, setError] = useState(false);
+  const [shake, setShake] = useState(false);
+
+  const handleLogin = () => {
+    if (pw === "Zenathegreatest") {
+      onLogin();
+    } else {
+      setError(true);
+      setShake(true);
+      setTimeout(() => setShake(false), 500);
+      setTimeout(() => setError(false), 2000);
+    }
+  };
+
+  return (
+    <div style={{ minHeight: "100vh", background: "#0a0a0a", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "2rem", position: "relative", overflow: "hidden" }}>
+      <div style={{ position: "absolute", inset: 0, backgroundImage: "url(" + HERO_IMG + ")", backgroundSize: "cover", backgroundPosition: "center", filter: "brightness(0.15) blur(8px)", transform: "scale(1.1)" }} />
+      <div style={{ position: "relative", zIndex: 2, textAlign: "center", width: "100%", maxWidth: 360 }}>
+        <div style={{ fontSize: "3rem", marginBottom: "1.5rem", opacity: 0.8 }}>💎</div>
+        <h1 style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(2rem,8vw,3.5rem)", fontWeight: 400, letterSpacing: "0.15em", color: "#f5efe6", margin: 0 }}>M & Z</h1>
+        <p style={{ fontStyle: "italic", color: "#c9a96e", letterSpacing: "0.25em", marginTop: "0.5rem", fontSize: "0.8rem", textTransform: "uppercase" }}>Forever Trying To Win Your Heart</p>
+        <div style={{ marginTop: "3rem" }}>
+          <input
+            type="password"
+            value={pw}
+            onChange={e => { setPw(e.target.value); setError(false); }}
+            onKeyDown={e => { if (e.key === "Enter") handleLogin(); }}
+            placeholder="Enter password"
+            style={{
+              width: "100%", padding: "14px 20px", background: "rgba(255,255,255,0.06)", border: "1px solid " + (error ? "#c4787a" : "rgba(201,169,110,0.2)"),
+              borderRadius: 8, color: "#f5efe6", fontFamily: "'Cormorant Garamond',serif", fontSize: "1.1rem", outline: "none", textAlign: "center",
+              letterSpacing: "0.15em", boxSizing: "border-box",
+              animation: shake ? "shake 0.5s ease" : "none"
+            }}
+          />
+          {error && <p style={{ color: "#c4787a", fontSize: "0.8rem", marginTop: 8, fontStyle: "italic" }}>Wrong password, try again</p>}
+          <button onClick={handleLogin} style={{ width: "100%", padding: "14px", background: "#c9a96e", color: "#0a0a0a", border: "none", borderRadius: 8, cursor: "pointer", fontFamily: "'Cormorant Garamond',serif", fontSize: "1.1rem", fontWeight: 600, letterSpacing: "0.1em", marginTop: "1rem" }}>
+            Enter
+          </button>
+        </div>
+        <p style={{ color: "rgba(245,239,230,0.25)", fontSize: "0.7rem", marginTop: "2rem", letterSpacing: "0.15em" }}>OUR PRIVATE SPACE</p>
+      </div>
+      <style>{"@keyframes shake { 0%,100%{transform:translateX(0)} 20%,60%{transform:translateX(-8px)} 40%,80%{transform:translateX(8px)} }"}</style>
+    </div>
+  );
+}
+
 // ===== THEME TOGGLE =====
 function ThemeToggle({ dark, setDark }) {
   return (
@@ -25,10 +76,10 @@ function ThemeToggle({ dark, setDark }) {
 function NavBar({ active, setActive, dark }) {
   const tabs = [
     { id: "home", label: "Home", icon: "♡" },
-    { id: "memories", label: "Memories", icon: "📸" },
     { id: "love", label: "Daily Love", icon: "💌" },
+    { id: "memories", label: "Memories", icon: "📸" },
+    { id: "wishlist", label: "Wishlist", icon: "💝" },
     { id: "contract", label: "Contract", icon: "📜" },
-    { id: "assets", label: "Assets", icon: "🏠" },
   ];
   return (
     <nav style={{ position: "fixed", bottom: 0, left: 0, right: 0, zIndex: 100, background: dark ? "rgba(10,10,10,0.95)" : "rgba(255,255,255,0.95)", backdropFilter: "blur(12px)", borderTop: "1px solid " + (dark ? "rgba(201,169,110,0.12)" : "rgba(0,0,0,0.1)"), display: "flex" }}>
@@ -632,7 +683,7 @@ function WishlistPage({ t }) {
     return () => unsub1();
   }, []);
 
-  const handleWishImg (e) => {
+  const handleWishImg = (e) => {
     const file = e.target.files[0]; if (!file) return;
     const r = new FileReader();
     r.onload = ev => setWishForm({ ...wishForm, img: ev.target.result });
