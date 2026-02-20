@@ -82,29 +82,29 @@ function HomePage({ t }) {
           <div style={{ position: "absolute", top: 0, left: "50%", transform: "translateX(-50%)", width: 40, height: 3, background: "linear-gradient(90deg,transparent,#c9a96e,transparent)", borderRadius: 2 }} />
           {[
             "Zena,",
-            "I need you to understand something. You\u2019re not just my girlfriend \u2014 you\u2019re the person I want to build everything with. Every dream I have, you\u2019re in the middle of it. Every plan I make, it starts and ends with you.",
-            "I\u2019m not here to just love you on the easy days. I\u2019m here for the hard ones too. I want to wake up every single morning and make sure your day is better than the last. Not sometimes \u2014 every day. That\u2019s not a goal, that\u2019s a commitment.",
-            "I want to give you the whole world. Not just the trips and the views \u2014 the real stuff. Homes with your name on them. Land that belongs to us. Cars in the driveway that you picked out yourself. A life where you never have to question if you\u2019re taken care of, because I already handled it.",
-            "And one day \u2014 our children. Little versions of us running around, growing up watching their father love their mother the way a woman should be loved. I want to build a family with you, Zena. A real one. One that lasts.",
-            "Everything you could possibly desire \u2014 I\u2019m working for it. Every late night, every sacrifice, every move I make is to build a life that\u2019s worthy of you.",
-            "I\u2019m not perfect. I know that. But I promise you this: no one on this earth will ever love you harder, fight for you stronger, or commit to you deeper than I will. You\u2019re my person, and I\u2019m yours. That\u2019s it. That\u2019s forever.",
+            "I need you to understand something. You’re not just my girlfriend — you’re the person I want to build everything with. Every dream I have, you’re in the middle of it. Every plan I make, it starts and ends with you.",
+            "I’m not here to just love you on the easy days. I’m here for the hard ones too. I want to wake up every single morning and make sure your day is better than the last. Not sometimes — every day. That’s not a goal, that’s a commitment.",
+            "I want to give you the whole world. Not just the trips and the views — the real stuff. Homes with your name on them. Land that belongs to us. Cars in the driveway that you picked out yourself. A life where you never have to question if you’re taken care of, because I already handled it.",
+            "And one day — our children. Little versions of us running around, growing up watching their father love their mother the way a woman should be loved. I want to build a family with you, Zena. A real one. One that lasts.",
+            "Everything you could possibly desire — I’m working for it. Every late night, every sacrifice, every move I make is to build a life that’s worthy of you.",
+            "I’m not perfect. I know that. But I promise you this: no one on this earth will ever love you harder, fight for you stronger, or commit to you deeper than I will. You’re my person, and I’m yours. That’s it. That’s forever.",
           ].map((p, i) => (
             <p key={i} style={{ fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(1.05rem,2.3vw,1.3rem)", lineHeight: 1.9, color: t.textSub, marginBottom: "1.6rem" }}>{p}</p>
           ))}
         </div>
 
         <div style={{ textAlign: "center", marginTop: "3.5rem", marginBottom: "1rem" }}>
-          <h3 style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(1.4rem,3vw,2rem)", fontWeight: 400, color: t.text, marginBottom: 8 }}>What I\u2019m Building For Us</h3>
-          <p style={{ fontStyle: "italic", color: t.gold, fontSize: "0.95rem", maxWidth: 550, margin: "0 auto", lineHeight: 1.7 }}>These aren\u2019t just words \u2014 they\u2019re my intentions. Every single one of these is something I\u2019m actively working towards giving you. This is the life I\u2019m building for us, Zena.</p>
+          <h3 style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(1.4rem,3vw,2rem)", fontWeight: 400, color: t.text, marginBottom: 8 }}>What I’m Building For Us</h3>
+          <p style={{ fontStyle: "italic", color: t.gold, fontSize: "0.95rem", maxWidth: 550, margin: "0 auto", lineHeight: 1.7 }}>These aren’t just words — they’re my intentions. Every single one of these is something I’m actively working towards giving you. This is the life I’m building for us, Zena.</p>
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(200px,1fr))", gap: "1rem", margin: "1.5rem 0 3rem" }}>
           {[
-            { icon: "\u{1F3E0}", title: "Homes", desc: "A place for us wherever we want. Our names on the deed." },
-            { icon: "\u{1F30D}", title: "Land", desc: "Something we build on, grow on, and pass down." },
-            { icon: "\u{1F697}", title: "Cars", desc: "Whatever you want in the driveway. You pick it, I make it happen." },
-            { icon: "\u{1F476}", title: "Children", desc: "Our family. The greatest thing we\u2019ll ever create together." },
-            { icon: "\u2708\uFE0F", title: "The World", desc: "Every continent, every country. Side by side." },
-            { icon: "\u{1F48E}", title: "Everything", desc: "Anything you desire. If it exists, I\u2019ll find a way." },
+            { icon: "🏠", title: "Homes", desc: "A place for us wherever we want. Our names on the deed." },
+            { icon: "🌍", title: "Land", desc: "Something we build on, grow on, and pass down." },
+            { icon: "🚗", title: "Cars", desc: "Whatever you want in the driveway. You pick it, I make it happen." },
+            { icon: "👶", title: "Children", desc: "Our family. The greatest thing we’ll ever create together." },
+            { icon: "✈️", title: "The World", desc: "Every continent, every country. Side by side." },
+            { icon: "💎", title: "Everything", desc: "Anything you desire. If it exists, I’ll find a way." },
           ].map((c, i) => (
             <div key={i} style={{ background: t.card, border: "1px solid " + t.cardBorder, borderRadius: 8, padding: "1.3rem", textAlign: "center" }}>
               <span style={{ fontSize: "2rem", display: "block", marginBottom: 8 }}>{c.icon}</span>
@@ -183,7 +183,7 @@ function MemoriesPage({ t, dark }) {
     });
     Object.entries(COUNTRY_DB).filter(([c]) => !visited.includes(c)).forEach(([c, info]) => {
       const icon = L.divIcon({ className: "", html: '<div style="width:10px;height:10px;background:#c4787a;border-radius:50%;border:2px solid #f5efe6;box-shadow:0 0 10px rgba(196,120,122,0.4);opacity:0.7"></div>', iconSize: [10, 10], iconAnchor: [5, 5] });
-      markersRef.current["f_" + c] = L.marker([info.lat, info.lng], { icon }).addTo(m).bindPopup(`<div style="font-family:\'Cormorant Garamond\',serif"><b style="font-family:\'Playfair Display\',serif;color:#c9a96e">${info.flag} ${c}</b><br><em>${info.tagline}</em><br><span style="color:#c4787a;font-size:0.75rem">\u2661 Coming soon</span></div>`);
+      markersRef.current["f_" + c] = L.marker([info.lat, info.lng], { icon }).addTo(m).bindPopup(`<div style="font-family:\'Cormorant Garamond\',serif"><b style="font-family:\'Playfair Display\',serif;color:#c9a96e">${info.flag} ${c}</b><br><em>${info.tagline}</em><br><span style="color:#c4787a;font-size:0.75rem">♡ Coming soon</span></div>`);
     });
   }, [images, mapLoaded]);
 
@@ -229,7 +229,7 @@ function MemoriesPage({ t, dark }) {
 
   const addCountryToList = () => {
     if (!newCountry.trim()) return;
-    if (!COUNTRY_DB[newCountry.trim()]) COUNTRY_DB[newCountry.trim()] = { lat: 20, lng: 0, flag: "\u{1F4CD}", tagline: "New adventure" };
+    if (!COUNTRY_DB[newCountry.trim()]) COUNTRY_DB[newCountry.trim()] = { lat: 20, lng: 0, flag: "📍", tagline: "New adventure" };
     setSelectedCountry(newCountry.trim()); setNewCountry("");
   };
 
@@ -247,15 +247,15 @@ function MemoriesPage({ t, dark }) {
       </div>
 
       <div style={{ border: "1px dashed " + t.gold + "40", borderRadius: 8, padding: "2rem", textAlign: "center", marginBottom: "2rem", background: t.card, cursor: "pointer" }} onClick={() => fileRef.current?.click()}>
-        <div style={{ fontSize: "2rem", marginBottom: 8 }}>\u{1F4F8}</div>
+        <div style={{ fontSize: "2rem", marginBottom: 8 }}>📸</div>
         <div style={{ fontFamily: "'Playfair Display',serif", fontSize: "1.2rem", color: t.text, marginBottom: 4 }}>Add New Memories</div>
-        <div style={{ fontSize: "0.85rem", color: t.textMuted, fontStyle: "italic" }}>Upload photos & videos \u2192 pick a country \u2192 auto-pinned to the map</div>
+        <div style={{ fontSize: "0.85rem", color: t.textMuted, fontStyle: "italic" }}>Upload photos & videos → pick a country → auto-pinned to the map</div>
         <input ref={fileRef} type="file" multiple accept="image/*,video/*" style={{ display: "none" }} onChange={handleFiles} />
       </div>
 
       {visited.length > 0 && (
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill,minmax(280px,1fr))", gap: "1.2rem", marginBottom: "2.5rem" }}>
-          {visited.map(c => { const info = COUNTRY_DB[c] || { flag: "\u{1F4CD}", tagline: "" }; const imgs = getImgs(c); return (
+          {visited.map(c => { const info = COUNTRY_DB[c] || { flag: "📍", tagline: "" }; const imgs = getImgs(c); return (
             <div key={c} style={{ background: t.card, border: "1px solid " + t.cardBorder, borderRadius: 6, overflow: "hidden" }}>
               <div style={{ padding: "1rem", display: "flex", alignItems: "center", gap: 8 }}>
                 <span style={{ fontSize: "1.5rem" }}>{info.flag}</span>
@@ -287,7 +287,7 @@ function MemoriesPage({ t, dark }) {
                 {img.type === "video" ? (
                   <div style={{ position: "relative" }}>
                     <video src={img.src} style={{ width: "100%", display: "block" }} muted />
-                    <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}><div style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(0,0,0,0.6)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, color: "#fff" }}>\u25B6</div></div>
+                    <div style={{ position: "absolute", inset: 0, display: "flex", alignItems: "center", justifyContent: "center" }}><div style={{ width: 40, height: 40, borderRadius: "50%", background: "rgba(0,0,0,0.6)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, color: "#fff" }}>▶</div></div>
                   </div>
                 ) : (
                   <img src={img.src} style={{ width: "100%", display: "block" }} alt="" />
@@ -299,7 +299,7 @@ function MemoriesPage({ t, dark }) {
         </>
       ) : (
         <div style={{ textAlign: "center", padding: "3rem", border: "1px dashed " + t.cardBorder, borderRadius: 8, marginBottom: "2rem" }}>
-          <p style={{ color: t.textMuted, fontStyle: "italic" }}>No memories yet \u2014 upload your first photos above and pin them to the map</p>
+          <p style={{ color: t.textMuted, fontStyle: "italic" }}>No memories yet — upload your first photos above and pin them to the map</p>
         </div>
       )}
 
@@ -315,8 +315,8 @@ function MemoriesPage({ t, dark }) {
       </div>
 
       <div style={{ textAlign: "center", marginTop: "3rem", padding: "2.5rem 1.5rem", border: "1px solid " + t.cardBorder, borderRadius: 6, background: t.card }}>
-        <p style={{ fontFamily: "'Playfair Display',serif", fontStyle: "italic", fontSize: "clamp(1rem,2.5vw,1.4rem)", color: t.text, lineHeight: 1.7, maxWidth: 550, margin: "0 auto" }}>I don\u2019t just want to see the world \u2014 I want to see it all through your eyes. Me and you, doing the whole world together.</p>
-        <div style={{ color: t.gold, marginTop: "1rem", fontSize: "0.85rem", letterSpacing: "0.2em" }}>\u2014 Malik, to Zena, forever</div>
+        <p style={{ fontFamily: "'Playfair Display',serif", fontStyle: "italic", fontSize: "clamp(1rem,2.5vw,1.4rem)", color: t.text, lineHeight: 1.7, maxWidth: 550, margin: "0 auto" }}>I don’t just want to see the world — I want to see it all through your eyes. Me and you, doing the whole world together.</p>
+        <div style={{ color: t.gold, marginTop: "1rem", fontSize: "0.85rem", letterSpacing: "0.2em" }}>— Malik, to Zena, forever</div>
       </div>
 
       {/* Country Selection Modal */}
@@ -337,7 +337,7 @@ function MemoriesPage({ t, dark }) {
               ))}
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)", gap: 6, marginBottom: "1rem", maxHeight: 200, overflowY: "auto" }}>
-              {allCountries.map(c => { const info = COUNTRY_DB[c] || { flag: "\u{1F4CD}" }; return (
+              {allCountries.map(c => { const info = COUNTRY_DB[c] || { flag: "📍" }; return (
                 <div key={c} onClick={() => setSelectedCountry(c)} style={{ padding: 8, background: selectedCountry === c ? t.gold + "20" : t.inputBg, border: "1px solid " + (selectedCountry === c ? t.gold : t.inputBorder), borderRadius: 6, cursor: "pointer", textAlign: "center" }}>
                   <div style={{ fontSize: "1.3rem" }}>{info.flag}</div>
                   <div style={{ fontSize: "0.8rem", color: t.text, marginTop: 2 }}>{c}</div>
@@ -360,7 +360,7 @@ function MemoriesPage({ t, dark }) {
       {confirmModal && (
         <div style={{ position: "fixed", inset: 0, background: t.overlay, zIndex: 2001, display: "flex", alignItems: "center", justifyContent: "center", backdropFilter: "blur(6px)" }}>
           <div style={{ background: t.surface, border: "1px solid " + t.cardBorder, borderRadius: 10, padding: "2rem", maxWidth: 400, width: "90%", textAlign: "center" }} onClick={e => e.stopPropagation()}>
-            <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>{(COUNTRY_DB[selectedCountry] || { flag: "\u{1F4CD}" }).flag}</div>
+            <div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>{(COUNTRY_DB[selectedCountry] || { flag: "📍" }).flag}</div>
             <h3 style={{ fontFamily: "'Playfair Display',serif", fontSize: "1.4rem", color: t.text, marginBottom: 8, fontWeight: 400 }}>Upload to {selectedCountry}?</h3>
             <p style={{ color: t.textMuted, fontSize: "0.95rem", marginBottom: "1.5rem" }}>{pending.length} file{pending.length > 1 ? "s" : ""} will be pinned to {selectedCountry}</p>
             <div style={{ display: "flex", gap: 10, justifyContent: "center" }}>
@@ -379,7 +379,7 @@ function MemoriesPage({ t, dark }) {
           ) : (
             <img src={lightbox.src} style={{ maxWidth: "92vw", maxHeight: "92vh", objectFit: "contain", borderRadius: 3 }} alt="" />
           )}
-          <span onClick={() => setLightbox(null)} style={{ position: "absolute", top: 16, right: 16, color: "#f5efe6", fontSize: 24, cursor: "pointer", opacity: 0.7 }}>\u2715</span>
+          <span onClick={() => setLightbox(null)} style={{ position: "absolute", top: 16, right: 16, color: "#f5efe6", fontSize: 24, cursor: "pointer", opacity: 0.7 }}>✕</span>
         </div>
       )}
     </div>
@@ -404,8 +404,8 @@ function DailyLovePage({ t }) {
   const generateQuote = async (prompt) => {
     setLoading(true);
     try {
-      const sysPrompt = "You are writing as Malik to his girlfriend Zena. Write a deeply personal, heartfelt love message. Keep it between 2-4 sentences. Make it feel raw, honest, and real \u2014 not generic. Reference things like: wanting to build a life together, admiring her beauty and strength, traveling the world together, being her protector, giving her everything she deserves, how she makes ordinary moments special. Never use cliches. Write like a real person deeply in love. Just output the quote, nothing else.";
-      const userPrompt = prompt || "Write today\u2019s love message from Malik to Zena. Make it unique and deeply personal.";
+      const sysPrompt = "You are writing as Malik to his girlfriend Zena. Write a deeply personal, heartfelt love message. Keep it between 2-4 sentences. Make it feel raw, honest, and real — not generic. Reference things like: wanting to build a life together, admiring her beauty and strength, traveling the world together, being her protector, giving her everything she deserves, how she makes ordinary moments special. Never use cliches. Write like a real person deeply in love. Just output the quote, nothing else.";
+      const userPrompt = prompt || "Write today’s love message from Malik to Zena. Make it unique and deeply personal.";
       const res = await fetch("https://api.anthropic.com/v1/messages", {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ model: "claude-sonnet-4-20250514", max_tokens: 300, system: sysPrompt, messages: [{ role: "user", content: userPrompt }] })
@@ -433,19 +433,19 @@ function DailyLovePage({ t }) {
       <div style={{ background: t.card, border: "1px solid " + t.cardBorder, borderRadius: 12, padding: "2.5rem 2rem", textAlign: "center", position: "relative", marginBottom: "2rem", minHeight: 200, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
         {quote ? (
           <>
-            <div style={{ fontSize: "4rem", opacity: 0.08, fontFamily: "'Playfair Display',serif", position: "absolute", top: 8, left: 20 }}>\u201C</div>
+            <div style={{ fontSize: "4rem", opacity: 0.08, fontFamily: "'Playfair Display',serif", position: "absolute", top: 8, left: 20 }}>“</div>
             <p style={{ fontFamily: "'Playfair Display',serif", fontStyle: "italic", fontSize: "clamp(1.2rem,3vw,1.6rem)", color: t.text, lineHeight: 1.8, maxWidth: 500, margin: "0 auto" }}>{quote.text}</p>
-            <div style={{ marginTop: "1.5rem", fontSize: "0.8rem", color: t.textMuted }}>{quote.date} \u2022 {quote.time}</div>
-            <div style={{ marginTop: 4, fontSize: "0.75rem", color: t.gold, letterSpacing: "0.2em" }}>\u2014 MALIK TO ZENA</div>
+            <div style={{ marginTop: "1.5rem", fontSize: "0.8rem", color: t.textMuted }}>{quote.date} • {quote.time}</div>
+            <div style={{ marginTop: 4, fontSize: "0.75rem", color: t.gold, letterSpacing: "0.2em" }}>— MALIK TO ZENA</div>
           </>
         ) : (
-          <div><div style={{ fontSize: "3rem", marginBottom: "1rem" }}>\u{1F48C}</div><p style={{ color: t.textMuted, fontStyle: "italic", fontSize: "1.05rem" }}>Tap below to generate today\u2019s love message</p></div>
+          <div><div style={{ fontSize: "3rem", marginBottom: "1rem" }}>💌</div><p style={{ color: t.textMuted, fontStyle: "italic", fontSize: "1.05rem" }}>Tap below to generate today’s love message</p></div>
         )}
       </div>
 
       <div style={{ display: "flex", flexDirection: "column", gap: "0.8rem", marginBottom: "2.5rem" }}>
         <button onClick={() => generateQuote()} disabled={loading} style={{ padding: "14px 24px", background: loading ? t.gold + "40" : t.gold, color: "#0a0a0a", border: "none", borderRadius: 8, cursor: loading ? "wait" : "pointer", fontFamily: "'Cormorant Garamond',serif", fontSize: "1.1rem", fontWeight: 600, letterSpacing: "0.08em" }}>
-          {loading ? "Writing from the heart..." : "\u2728 Generate Today\u2019s Love Quote"}
+          {loading ? "Writing from the heart..." : "✨ Generate Today’s Love Quote"}
         </button>
         <div style={{ display: "flex", gap: 6 }}>
           {["How much I admire her", "Our future together", "How beautiful she is", "How she changed my life"].map((topic, i) => (
@@ -465,7 +465,7 @@ function DailyLovePage({ t }) {
             {history.slice(1).map((q, i) => (
               <div key={i} style={{ background: t.card, border: "1px solid " + t.cardBorder, borderRadius: 8, padding: "1.2rem" }}>
                 <p style={{ fontFamily: "'Cormorant Garamond',serif", fontStyle: "italic", fontSize: "1.05rem", color: t.textSub, lineHeight: 1.7, marginBottom: 8 }}>{q.text}</p>
-                <div style={{ fontSize: "0.7rem", color: t.textMuted }}>{q.date} \u2022 {q.time}</div>
+                <div style={{ fontSize: "0.7rem", color: t.textMuted }}>{q.date} • {q.time}</div>
               </div>
             ))}
           </div>
@@ -587,22 +587,22 @@ function ContractPage({ t }) {
       </div>
       <div style={{ background: t.card, border: "1px solid " + t.cardBorder, borderRadius: 8, padding: "clamp(1.5rem,4vw,2.5rem)" }}>
         <p style={cp}>Entered into on this day, <b style={{ color: t.gold }}>{today}</b>, between <b>Malik</b> and <b>Zena</b>, both of sound mind, full heart, and free will.</p>
-        <p style={cp}>This agreement is born not from doubt but from a deep desire to show, in writing, what words alone sometimes cannot carry. This is Malik\u2019s way of saying: <i style={{ color: t.gold }}>I\u2019m all in, and I mean it.</i></p>
+        <p style={cp}>This agreement is born not from doubt but from a deep desire to show, in writing, what words alone sometimes cannot carry. This is Malik’s way of saying: <i style={{ color: t.gold }}>I’m all in, and I mean it.</i></p>
         <h3 style={ch}>I. Moving As One</h3>
-        <p style={cp}>From this day forward, Malik and Zena agree to move through life as one unit. No major decision \u2014 financial, personal, family-related, or otherwise \u2014 shall be made without the full knowledge, input, and agreement of the other. Both carry equal weight. 50/50, always.</p>
+        <p style={cp}>From this day forward, Malik and Zena agree to move through life as one unit. No major decision — financial, personal, family-related, or otherwise — shall be made without the full knowledge, input, and agreement of the other. Both carry equal weight. 50/50, always.</p>
         <h3 style={ch}>II. Full Transparency & Access</h3>
-        <p style={cp}>Malik and Zena agree to maintain complete openness. Each party shall have unrestricted access to the other\u2019s personal belongings, accounts, devices, and information \u2014 phones, social media, bank accounts, all personal documents. No secrets. This goes both ways.</p>
+        <p style={cp}>Malik and Zena agree to maintain complete openness. Each party shall have unrestricted access to the other’s personal belongings, accounts, devices, and information — phones, social media, bank accounts, all personal documents. No secrets. This goes both ways.</p>
         <h3 style={ch}>III. Accountability & Consequences</h3>
-        <p style={cp}>In the event that Malik violates the trust, loyalty, or commitment of this relationship \u2014 whether through infidelity, dishonesty, neglect, or betrayal \u2014 Zena shall be entitled to full ownership of any and all properties, land, real estate, assets, vehicles, savings, and investments owned by Malik or acquired at any point in the future.</p>
-        <p style={cp}>This is Malik\u2019s personal commitment. He stands behind every word and accepts these terms fully, with no conditions and no hesitation.</p>
+        <p style={cp}>In the event that Malik violates the trust, loyalty, or commitment of this relationship — whether through infidelity, dishonesty, neglect, or betrayal — Zena shall be entitled to full ownership of any and all properties, land, real estate, assets, vehicles, savings, and investments owned by Malik or acquired at any point in the future.</p>
+        <p style={cp}>This is Malik’s personal commitment. He stands behind every word and accepts these terms fully, with no conditions and no hesitation.</p>
         <h3 style={ch}>IV. Mutual Respect & Communication</h3>
         <p style={cp}>Both parties agree to communicate with honesty, patience, and respect. Disagreements handled through conversation, never silence or manipulation. Always fighting for the relationship, not against each other.</p>
         <h3 style={ch}>V. Loyalty & Protection</h3>
-        <p style={cp}>Malik and Zena agree to protect each other\u2019s peace, reputation, and wellbeing at all times. What happens between them stays between them.</p>
+        <p style={cp}>Malik and Zena agree to protect each other’s peace, reputation, and wellbeing at all times. What happens between them stays between them.</p>
         <h3 style={ch}>VI. Duration</h3>
-        <p style={cp}>This agreement is effective immediately and remains in effect for as long as both parties are in this relationship. This contract is a living document \u2014 it grows as they grow.</p>
+        <p style={cp}>This agreement is effective immediately and remains in effect for as long as both parties are in this relationship. This contract is a living document — it grows as they grow.</p>
         <div style={{ textAlign: "center", marginTop: "2.5rem", paddingTop: "1.5rem", borderTop: "1px solid " + t.cardBorder }}>
-          <p style={{ fontStyle: "italic", color: t.text, fontFamily: "'Playfair Display',serif", fontSize: "1.05rem" }}>This is not just paper \u2014 it is a promise.</p>
+          <p style={{ fontStyle: "italic", color: t.text, fontFamily: "'Playfair Display',serif", fontSize: "1.05rem" }}>This is not just paper — it is a promise.</p>
           <div style={{ display: "flex", justifyContent: "space-around", marginTop: "2.5rem", flexWrap: "wrap", gap: "2rem" }}>
             {["Malik", "Zena"].map(n => (<SignaturePad key={n} name={n} t={t} />))}
           </div>
@@ -668,15 +668,15 @@ function WishlistPage({ t }) {
 
       {/* Tab Toggle */}
       <div style={{ display: "flex", gap: 0, marginBottom: "1.5rem", borderRadius: 8, overflow: "hidden", border: "1px solid " + t.cardBorder }}>
-        <button onClick={() => setTab("wishes")} style={{ flex: 1, padding: "12px", background: tab === "wishes" ? t.gold : "transparent", color: tab === "wishes" ? "#0a0a0a" : t.gold, border: "none", cursor: "pointer", fontFamily: "'Cormorant Garamond',serif", fontSize: "0.95rem", fontWeight: tab === "wishes" ? 700 : 400 }}>{"\u{1F49D}"} Zena's Wishes</button>
-        <button onClick={() => setTab("assets")} style={{ flex: 1, padding: "12px", background: tab === "assets" ? t.gold : "transparent", color: tab === "assets" ? "#0a0a0a" : t.gold, border: "none", cursor: "pointer", fontFamily: "'Cormorant Garamond',serif", fontSize: "0.95rem", fontWeight: tab === "assets" ? 700 : 400 }}>{"\u{1F3E0}"} Our Assets</button>
+        <button onClick={() => setTab("wishes")} style={{ flex: 1, padding: "12px", background: tab === "wishes" ? t.gold : "transparent", color: tab === "wishes" ? "#0a0a0a" : t.gold, border: "none", cursor: "pointer", fontFamily: "'Cormorant Garamond',serif", fontSize: "0.95rem", fontWeight: tab === "wishes" ? 700 : 400 }}>{"💝"} Zena's Wishes</button>
+        <button onClick={() => setTab("assets")} style={{ flex: 1, padding: "12px", background: tab === "assets" ? t.gold : "transparent", color: tab === "assets" ? "#0a0a0a" : t.gold, border: "none", cursor: "pointer", fontFamily: "'Cormorant Garamond',serif", fontSize: "0.95rem", fontWeight: tab === "assets" ? 700 : 400 }}>{"🏠"} Our Assets</button>
       </div>
 
       {/* WISHES TAB */}
       {tab === "wishes" && (
         <div>
           <div style={{ border: "1px dashed " + t.gold + "40", borderRadius: 8, padding: "1.5rem", textAlign: "center", marginBottom: "1.5rem", background: t.card, cursor: "pointer" }} onClick={() => setShowAddWish(true)}>
-            <div style={{ fontSize: "1.5rem", marginBottom: 6 }}>{"\u2728"}</div>
+            <div style={{ fontSize: "1.5rem", marginBottom: 6 }}>{"✨"}</div>
             <div style={{ fontFamily: "'Playfair Display',serif", fontSize: "1.05rem", color: t.text, marginBottom: 4 }}>Add a Wish</div>
             <div style={{ fontSize: "0.8rem", color: t.textMuted, fontStyle: "italic" }}>Upload an image, add a name & description</div>
           </div>
@@ -688,34 +688,34 @@ function WishlistPage({ t }) {
             </div>
             <div style={{ flex: 1, background: "rgba(143,181,143,0.08)", border: "1px solid rgba(143,181,143,0.2)", borderRadius: 8, padding: "0.8rem", textAlign: "center" }}>
               <div style={{ fontSize: "1.5rem", fontWeight: 700, color: "#8fb58f" }}>{grantedCount}</div>
-              <div style={{ fontSize: "0.7rem", color: t.textMuted, letterSpacing: "0.1em" }}>GRANTED {"\u2713"}</div>
+              <div style={{ fontSize: "0.7rem", color: t.textMuted, letterSpacing: "0.1em" }}>GRANTED {"✓"}</div>
             </div>
           </div>
 
           {wishes.length > 0 ? wishes.map(wish => (
             <div key={wish.id} style={{ background: t.card, border: "1px solid " + t.cardBorder, borderRadius: 8, padding: "1rem", marginBottom: "0.8rem", display: "flex", gap: "1rem", alignItems: "center" }}>
               <div style={{ width: 65, height: 65, borderRadius: 6, background: t.inputBg, border: "1px solid " + t.cardBorder, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "1.8rem", flexShrink: 0, overflow: "hidden" }}>
-                {wish.img ? <img src={wish.img} style={{ width: "100%", height: "100%", objectFit: "cover" }} alt="" /> : "\u{1F381}"}
+                {wish.img ? <img src={wish.img} style={{ width: "100%", height: "100%", objectFit: "cover" }} alt="" /> : "🎁"}
               </div>
               <div style={{ flex: 1, minWidth: 0 }}>
                 <div style={{ fontFamily: "'Playfair Display',serif", fontSize: "1.05rem", color: t.text, textDecoration: wish.granted ? "line-through" : "none", opacity: wish.granted ? 0.6 : 1 }}>{wish.name}</div>
                 {wish.desc && <div style={{ fontSize: "0.8rem", color: t.textMuted, fontStyle: "italic", marginTop: 2 }}>{wish.desc}</div>}
               </div>
               <div onClick={() => toggleGranted(wish)} style={{ width: 32, height: 32, borderRadius: 6, border: wish.granted ? "2px solid #8fb58f" : "2px solid " + t.cardBorder, background: wish.granted ? "rgba(143,181,143,0.15)" : "transparent", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", flexShrink: 0 }}>
-                {wish.granted && <span style={{ color: "#8fb58f", fontSize: 18 }}>{"\u2713"}</span>}
+                {wish.granted && <span style={{ color: "#8fb58f", fontSize: 18 }}>{"✓"}</span>}
               </div>
-              <button onClick={() => deleteWish(wish.id)} style={{ background: "none", border: "none", color: t.textMuted, cursor: "pointer", fontSize: 14, padding: 4, opacity: 0.4 }}>{"\u2715"}</button>
+              <button onClick={() => deleteWish(wish.id)} style={{ background: "none", border: "none", color: t.textMuted, cursor: "pointer", fontSize: 14, padding: 4, opacity: 0.4 }}>{"✕"}</button>
             </div>
           )) : (
             <div style={{ textAlign: "center", padding: "3rem", border: "1px dashed " + t.cardBorder, borderRadius: 8 }}>
-              <div style={{ fontSize: "2rem", marginBottom: 8 }}>{"\u{1F49D}"}</div>
+              <div style={{ fontSize: "2rem", marginBottom: 8 }}>{"💝"}</div>
               <p style={{ color: t.textMuted, fontStyle: "italic" }}>No wishes yet — add your first one above</p>
             </div>
           )}
 
           <div style={{ textAlign: "center", marginTop: "2rem", padding: "1.5rem", border: "1px solid " + t.cardBorder, borderRadius: 6, background: t.card }}>
-            <p style={{ fontStyle: "italic", fontSize: "1rem", color: t.text, lineHeight: 1.7 }}>Whatever you want, just add it here. I'll make it happen. {"\u2728"}</p>
-            <div style={{ color: t.gold, marginTop: 8, fontSize: "0.8rem", letterSpacing: "0.15em" }}>{"\u2014"} MALIK</div>
+            <p style={{ fontStyle: "italic", fontSize: "1rem", color: t.text, lineHeight: 1.7 }}>Whatever you want, just add it here. I'll make it happen. {"✨"}</p>
+            <div style={{ color: t.gold, marginTop: 8, fontSize: "0.8rem", letterSpacing: "0.15em" }}>{"—"} MALIK</div>
           </div>
         </div>
       )}
@@ -738,12 +738,12 @@ function WishlistPage({ t }) {
                     <div style={{ flex: 1, minWidth: 150 }}><div style={{ fontFamily: "'Playfair Display',serif", fontSize: "1.05rem", color: t.text }}>{item.name}</div>{item.notes && <div style={{ fontSize: "0.8rem", color: t.textMuted, fontStyle: "italic", marginTop: 2 }}>{item.notes}</div>}</div>
                     {item.value && <div style={{ fontFamily: "'Playfair Display',serif", fontSize: "1rem", color: t.gold }}>{item.value}</div>}
                     <span style={{ fontSize: "0.65rem", padding: "3px 10px", borderRadius: 20, background: statusColors[item.status] + "20", color: statusColors[item.status], letterSpacing: "0.08em", textTransform: "uppercase", fontWeight: 600 }}>{statusLabels[item.status]}</span>
-                    <button onClick={() => deleteAssetDB(item.id)} style={{ background: "none", border: "none", color: t.textMuted, cursor: "pointer", fontSize: 16, padding: 4, opacity: 0.5 }}>{"\u2715"}</button>
+                    <button onClick={() => deleteAssetDB(item.id)} style={{ background: "none", border: "none", color: t.textMuted, cursor: "pointer", fontSize: 16, padding: 4, opacity: 0.5 }}>{"✕"}</button>
                   </div>
                 ))}
               </div>
             </div>
-          )) : (<div style={{ textAlign: "center", padding: "4rem 2rem", border: "1px dashed " + t.cardBorder, borderRadius: 8 }}><div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>{"\u{1F3E0}"}</div><p style={{ color: t.textMuted, fontStyle: "italic", marginBottom: 8 }}>No assets added yet</p></div>); })()}
+          )) : (<div style={{ textAlign: "center", padding: "4rem 2rem", border: "1px dashed " + t.cardBorder, borderRadius: 8 }}><div style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>{"🏠"}</div><p style={{ color: t.textMuted, fontStyle: "italic", marginBottom: 8 }}>No assets added yet</p></div>); })()}
         </div>
       )}
 
@@ -751,7 +751,7 @@ function WishlistPage({ t }) {
       {showAddWish && (
         <div style={{ position: "fixed", inset: 0, background: t.overlay, zIndex: 2000, display: "flex", alignItems: "center", justifyContent: "center", backdropFilter: "blur(6px)" }} onClick={() => setShowAddWish(false)}>
           <div style={{ background: t.surface, border: "1px solid " + t.cardBorder, borderRadius: 10, padding: "1.5rem", maxWidth: 460, width: "90%" }} onClick={e => e.stopPropagation()}>
-            <h3 style={{ fontFamily: "'Playfair Display',serif", fontSize: "1.3rem", color: t.text, marginBottom: "1.2rem", fontWeight: 400 }}>Add a Wish {"\u{1F49D}"}</h3>
+            <h3 style={{ fontFamily: "'Playfair Display',serif", fontSize: "1.3rem", color: t.text, marginBottom: "1.2rem", fontWeight: 400 }}>Add a Wish {"💝"}</h3>
             <div style={{ marginBottom: 12 }}><label style={{ fontSize: "0.8rem", color: t.textMuted, display: "block", marginBottom: 4, letterSpacing: "0.1em", textTransform: "uppercase" }}>What do you want?</label><input value={wishForm.name} onChange={e => setWishForm({ ...wishForm, name: e.target.value })} placeholder="e.g. Birkin Bag, Trip to Bali, Diamond Ring" style={inputStyle} /></div>
             <div style={{ marginBottom: 12 }}><label style={{ fontSize: "0.8rem", color: t.textMuted, display: "block", marginBottom: 4, letterSpacing: "0.1em", textTransform: "uppercase" }}>Description (optional)</label><input value={wishForm.desc} onChange={e => setWishForm({ ...wishForm, desc: e.target.value })} placeholder="e.g. Black 30cm, Gold chain" style={inputStyle} /></div>
             <div style={{ marginBottom: 16 }}>
@@ -759,11 +759,11 @@ function WishlistPage({ t }) {
               {wishForm.img ? (
                 <div style={{ position: "relative", width: 100, height: 100, borderRadius: 6, overflow: "hidden" }}>
                   <img src={wishForm.img} style={{ width: "100%", height: "100%", objectFit: "cover" }} alt="" />
-                  <button onClick={() => setWishForm({ ...wishForm, img: null })} style={{ position: "absolute", top: 4, right: 4, background: "rgba(0,0,0,0.6)", border: "none", color: "#fff", borderRadius: "50%", width: 22, height: 22, cursor: "pointer", fontSize: 12 }}>{"\u2715"}</button>
+                  <button onClick={() => setWishForm({ ...wishForm, img: null })} style={{ position: "absolute", top: 4, right: 4, background: "rgba(0,0,0,0.6)", border: "none", color: "#fff", borderRadius: "50%", width: 22, height: 22, cursor: "pointer", fontSize: 12 }}>{"✕"}</button>
                 </div>
               ) : (
                 <div onClick={() => wishImgRef.current?.click()} style={{ width: 100, height: 100, borderRadius: 6, border: "1px dashed " + t.gold + "40", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", cursor: "pointer", background: t.inputBg }}>
-                  <div style={{ fontSize: "1.5rem", marginBottom: 4 }}>{"\u{1F4F7}"}</div>
+                  <div style={{ fontSize: "1.5rem", marginBottom: 4 }}>{"📷"}</div>
                   <div style={{ fontSize: "0.65rem", color: t.textMuted }}>Upload</div>
                 </div>
               )}
