@@ -21,7 +21,9 @@ function LoginScreen({ onLogin }) {
 
   const handleLogin = () => {
     if (pw === "Zenathegreatest") {
-      onLogin();
+      onLogin(false);
+    } else if (pw === "admin") {
+      onLogin(true);
     } else {
       setError(true);
       setShake(true);
@@ -112,7 +114,7 @@ function useThemeStyles(dark) {
 }
 
 // ===== HOME PAGE =====
-function HomePage({ t }) {
+function HomePage({ t, isAdmin }) {
   return (
     <div style={{ minHeight: "100vh" }}>
       <div style={{ height: "100vh", position: "relative", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
@@ -174,7 +176,7 @@ function HomePage({ t }) {
 }
 
 // ===== MEMORIES PAGE =====
-function MemoriesPage({ t, dark }) {
+function MemoriesPage({ t, dark, isAdmin }) {
   const [images, setImages] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [confirmModal, setConfirmModal] = useState(false);
@@ -238,19 +240,39 @@ function MemoriesPage({ t, dark }) {
     });
   }, [images, mapLoaded]);
 
-  const handleFiles = e => {
-    const files = Array.from(e.target.files); if (!files.length) return;
-    let loaded = [], count = 0;
-    files.forEach(file => {
+  const compressImage = (file, maxWidth = 800, quality = 0.6) => {
+    return new Promise((resolve) => {
+      if (file.type.startsWith("video/")) {
+        const r = new FileReader();
+        r.onload = ev => resolve({ src: ev.target.result, type: "video" });
+        r.readAsDataURL(file);
+        return;
+      }
+      const img = new Image();
       const r = new FileReader();
       r.onload = ev => {
-        const isVideo = file.type.startsWith("video/");
-        loaded.push({ src: ev.target.result, caption: file.name.replace(/\.[^.]+$/, "").replace(/[-_]/g, " "), type: isVideo ? "video" : "photo" });
-        count++;
-        if (count === files.length) { setPending(loaded); setShowModal(true); }
+        img.onload = () => {
+          const canvas = document.createElement("canvas");
+          let w = img.width, h = img.height;
+          if (w > maxWidth) { h = (h * maxWidth) / w; w = maxWidth; }
+          canvas.width = w; canvas.height = h;
+          canvas.getContext("2d").drawImage(img, 0, 0, w, h);
+          resolve({ src: canvas.toDataURL("image/jpeg", quality), type: "photo" });
+        };
+        img.src = ev.target.result;
       };
       r.readAsDataURL(file);
     });
+  };
+
+  const handleFiles = async (e) => {
+    const files = Array.from(e.target.files); if (!files.length) return;
+    const loaded = [];
+    for (const file of files) {
+      const result = await compressImage(file);
+      loaded.push({ ...result, caption: file.name.replace(/\.[^.]+$/, "").replace(/[-_]/g, " ") });
+    }
+    setPending(loaded); setShowModal(true);
     e.target.value = "";
   };
 
@@ -438,7 +460,7 @@ function MemoriesPage({ t, dark }) {
 }
 
 // ===== DAILY LOVE =====
-function DailyLovePage({ t }) {
+function DailyLovePage({ t, isAdmin }) {
   const [quote, setQuote] = useState(null);
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -514,9 +536,10 @@ function DailyLovePage({ t }) {
           <h3 style={{ fontFamily: "'Playfair Display',serif", fontSize: "1.3rem", fontWeight: 400, color: t.text, marginBottom: "1rem" }}>Previous Messages</h3>
           <div style={{ display: "flex", flexDirection: "column", gap: "0.8rem" }}>
             {history.slice(1).map((q, i) => (
-              <div key={i} style={{ background: t.card, border: "1px solid " + t.cardBorder, borderRadius: 8, padding: "1.2rem" }}>
+              <div key={i} style={{ background: t.card, border: "1px solid " + t.cardBorder, borderRadius: 8, padding: "1.2rem", position: "relative" }}>
                 <p style={{ fontFamily: "'Cormorant Garamond',serif", fontStyle: "italic", fontSize: "1.05rem", color: t.textSub, lineHeight: 1.7, marginBottom: 8 }}>{q.text}</p>
                 <div style={{ fontSize: "0.7rem", color: t.textMuted }}>{q.date} • {q.time}</div>
+                {isAdmin && q.id && <button onClick={async () => { const { deleteDoc, doc, db } = await import("@/lib/firebase"); await deleteDoc(doc(db, "loveQuotes", q.id)); }} style={{ position: "absolute", top: 8, right: 8, background: "none", border: "none", color: t.textMuted, cursor: "pointer", fontSize: 12, opacity: 0.4 }}>✕</button>}
               </div>
             ))}
           </div>
@@ -625,7 +648,7 @@ function SignaturePad({ name, t }) {
 }
 
 // ===== CONTRACT =====
-function ContractPage({ t }) {
+function ContractPage({ t, isAdmin }) {
   const today = new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
   const cp = { fontFamily: "'Cormorant Garamond',serif", fontSize: "clamp(1rem,2.2vw,1.15rem)", lineHeight: 1.8, color: t.textSub, marginBottom: "1.2rem" };
   const ch = { fontFamily: "'Playfair Display',serif", fontSize: "1.15rem", color: t.text, fontWeight: 400, marginTop: "2rem", marginBottom: "0.8rem" };
@@ -664,7 +687,7 @@ function ContractPage({ t }) {
 }
 
 // ===== WISHLIST PAGE =====
-function WishlistPage({ t }) {
+function WishlistPage({ t, isAdmin }) {
   const [tab, setTab] = useState("wishes");
   const [wishes, setWishes] = useState([]);
   const [assets, setAssets] = useState([]);
@@ -685,8 +708,19 @@ function WishlistPage({ t }) {
 
   const handleWishImg = (e) => {
     const file = e.target.files[0]; if (!file) return;
+    const img = new Image();
     const r = new FileReader();
-    r.onload = ev => setWishForm({ ...wishForm, img: ev.target.result });
+    r.onload = ev => {
+      img.onload = () => {
+        const canvas = document.createElement("canvas");
+        let w = img.width, h = img.height;
+        if (w > 600) { h = (h * 600) / w; w = 600; }
+        canvas.width = w; canvas.height = h;
+        canvas.getContext("2d").drawImage(img, 0, 0, w, h);
+        setWishForm({ ...wishForm, img: canvas.toDataURL("image/jpeg", 0.6) });
+      };
+      img.src = ev.target.result;
+    };
     r.readAsDataURL(file);
     e.target.value = "";
   };
@@ -752,10 +786,10 @@ function WishlistPage({ t }) {
                 <div style={{ fontFamily: "'Playfair Display',serif", fontSize: "1.05rem", color: t.text, textDecoration: wish.granted ? "line-through" : "none", opacity: wish.granted ? 0.6 : 1 }}>{wish.name}</div>
                 {wish.desc && <div style={{ fontSize: "0.8rem", color: t.textMuted, fontStyle: "italic", marginTop: 2 }}>{wish.desc}</div>}
               </div>
-              <div onClick={() => toggleGranted(wish)} style={{ width: 32, height: 32, borderRadius: 6, border: wish.granted ? "2px solid #8fb58f" : "2px solid " + t.cardBorder, background: wish.granted ? "rgba(143,181,143,0.15)" : "transparent", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", flexShrink: 0 }}>
+              <div onClick={() => { if (isAdmin) toggleGranted(wish); }} style={{ width: 32, height: 32, cursor: isAdmin ? "pointer" : "default", borderRadius: 6, border: wish.granted ? "2px solid #8fb58f" : "2px solid " + t.cardBorder, background: wish.granted ? "rgba(143,181,143,0.15)" : "transparent", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", flexShrink: 0 }}>
                 {wish.granted && <span style={{ color: "#8fb58f", fontSize: 18 }}>{"✓"}</span>}
               </div>
-              <button onClick={() => deleteWish(wish.id)} style={{ background: "none", border: "none", color: t.textMuted, cursor: "pointer", fontSize: 14, padding: 4, opacity: 0.4 }}>{"✕"}</button>
+              {isAdmin && <button onClick={() => deleteWish(wish.id)} style={{ background: "none", border: "none", color: t.textMuted, cursor: "pointer", fontSize: 14, padding: 4, opacity: 0.4 }}>{"✕"}</button>}
             </div>
           )) : (
             <div style={{ textAlign: "center", padding: "3rem", border: "1px dashed " + t.cardBorder, borderRadius: 8 }}>
@@ -789,7 +823,7 @@ function WishlistPage({ t }) {
                     <div style={{ flex: 1, minWidth: 150 }}><div style={{ fontFamily: "'Playfair Display',serif", fontSize: "1.05rem", color: t.text }}>{item.name}</div>{item.notes && <div style={{ fontSize: "0.8rem", color: t.textMuted, fontStyle: "italic", marginTop: 2 }}>{item.notes}</div>}</div>
                     {item.value && <div style={{ fontFamily: "'Playfair Display',serif", fontSize: "1rem", color: t.gold }}>{item.value}</div>}
                     <span style={{ fontSize: "0.65rem", padding: "3px 10px", borderRadius: 20, background: statusColors[item.status] + "20", color: statusColors[item.status], letterSpacing: "0.08em", textTransform: "uppercase", fontWeight: 600 }}>{statusLabels[item.status]}</span>
-                    <button onClick={() => deleteAssetDB(item.id)} style={{ background: "none", border: "none", color: t.textMuted, cursor: "pointer", fontSize: 16, padding: 4, opacity: 0.5 }}>{"✕"}</button>
+                    {isAdmin && <button onClick={() => deleteAssetDB(item.id)} style={{ background: "none", border: "none", color: t.textMuted, cursor: "pointer", fontSize: 16, padding: 4, opacity: 0.5 }}>{"✕"}</button>}
                   </div>
                 ))}
               </div>
@@ -849,20 +883,21 @@ function WishlistPage({ t }) {
 // ===== MAIN APP =====
 export default function App() {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [active, setActive] = useState("home");
   const [dark, setDark] = useState(true);
   const t = useThemeStyles(dark);
 
-  if (!loggedIn) return <LoginScreen onLogin={() => setLoggedIn(true)} />;
+  if (!loggedIn) return <LoginScreen onLogin={(admin) => { setLoggedIn(true); setIsAdmin(admin); }} />;
 
   return (
     <div style={{ background: t.bg, minHeight: "100vh", paddingBottom: 70, transition: "background 0.3s" }}>
       <ThemeToggle dark={dark} setDark={setDark} />
-      {active === "home" && <HomePage t={t} />}
-      {active === "love" && <DailyLovePage t={t} />}
-      {active === "memories" && <MemoriesPage t={t} dark={dark} />}
-      {active === "wishlist" && <WishlistPage t={t} />}
-      {active === "contract" && <ContractPage t={t} />}
+      {active === "home" && <HomePage t={t} isAdmin={isAdmin} />}
+      {active === "love" && <DailyLovePage t={t} isAdmin={isAdmin} />}
+      {active === "memories" && <MemoriesPage t={t} dark={dark} isAdmin={isAdmin} />}
+      {active === "wishlist" && <WishlistPage t={t} isAdmin={isAdmin} />}
+      {active === "contract" && <ContractPage t={t} isAdmin={isAdmin} />}
       <NavBar active={active} setActive={setActive} dark={dark} />
     </div>
   );
