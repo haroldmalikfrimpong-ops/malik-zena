@@ -368,7 +368,8 @@ function MemoriesPage({ t, dark, isAdmin }) {
       <div style={{ border: "1px dashed " + t.gold + "40", borderRadius: 8, padding: "2rem", textAlign: "center", marginBottom: "2rem", background: t.card, cursor: "pointer" }} onClick={() => fileRef.current?.click()}>
         <div style={{ fontSize: "2rem", marginBottom: 8 }}>📸</div>
         <div style={{ fontFamily: "'Playfair Display',serif", fontSize: "1.2rem", color: t.text, marginBottom: 4 }}>Add New Memories</div>
-        <div style={{ fontSize: "0.85rem", color: t.textMuted, fontStyle: "italic" }}>Upload photos & videos → pick a country → auto-pinned to the map</div>
+        <div style={{ fontSize: "0.85rem", color: t.textMuted, fontStyle: "italic" }}>Upload photos → pick a country → pinned to the map</div>
+        <div style={{ display: "inline-flex", alignItems: "center", gap: 6, marginTop: 10, padding: "4px 12px", background: "rgba(196,120,122,0.1)", border: "1px solid rgba(196,120,122,0.2)", borderRadius: 20, fontSize: "0.7rem", color: "#c4787a" }}>🎬 Video uploads coming soon</div>
         <input ref={fileRef} type="file" multiple accept="image/*" style={{ display: "none" }} onChange={handleFiles} />
       </div>
 
@@ -711,35 +712,59 @@ function ContractPage({ t, isAdmin }) {
     <div style={{ minHeight: "100vh", padding: "2rem 1rem 6rem", maxWidth: 800, margin: "0 auto" }}>
       <div style={{ textAlign: "center", marginTop: "1rem", marginBottom: "2.5rem" }}>
         <h2 style={{ fontFamily: "'Playfair Display',serif", fontSize: "clamp(1.8rem,5vw,2.8rem)", fontWeight: 400, color: t.text, marginBottom: 4 }}>OUR PROMISE</h2>
-        <p style={{ fontStyle: "italic", color: t.gold, letterSpacing: "0.15em", fontSize: "0.9rem" }}>A Binding Agreement of Love, Trust & Partnership</p>
+        <p style={{ fontStyle: "italic", color: t.gold, letterSpacing: "0.15em", fontSize: "0.9rem" }}>A Binding Agreement of Love, Trust & Devotion</p>
         <div style={{ width: 60, height: 1, background: t.gold, margin: "1.5rem auto", opacity: 0.5 }} />
       </div>
       <div style={{ background: t.card, border: "1px solid " + t.cardBorder, borderRadius: 8, padding: "clamp(1.5rem,4vw,2.5rem)" }}>
-        <p style={cp}>Entered into on this day, <b style={{ color: t.gold }}>{today}</b>, between <b>Malik</b> and <b>Zena</b>, both of sound mind, full heart, and free will.</p>
-        <p style={cp}>This agreement is born not from doubt but from a deep desire to show, in writing, what words alone sometimes cannot carry. This is Malik’s way of saying: <i style={{ color: t.gold }}>I’m all in, and I mean it.</i></p>
-        <h3 style={ch}>I. Moving As One</h3>
-        <p style={cp}>From this day forward, Malik and Zena agree to move through life as one unit. No major decision — financial, personal, family-related, or otherwise — shall be made without the full knowledge, input, and agreement of the other. Both carry equal weight. 50/50, always.</p>
-        <h3 style={ch}>II. Full Transparency & Access</h3>
-        <p style={cp}>Malik and Zena agree to maintain complete openness. Each party shall have unrestricted access to the other’s personal belongings, accounts, devices, and information — phones, social media, bank accounts, all personal documents. No secrets. This goes both ways.</p>
-        <h3 style={ch}>III. Accountability & Consequences</h3>
-        <p style={cp}>In the event that Malik violates the trust, loyalty, or commitment of this relationship — whether through infidelity, dishonesty, neglect, or betrayal — Zena shall be entitled to full ownership of any and all properties, land, real estate, assets, vehicles, savings, and investments owned by Malik or acquired at any point in the future.</p>
-        <p style={cp}>This is Malik’s personal commitment. He stands behind every word and accepts these terms fully, with no conditions and no hesitation.</p>
-        <h3 style={ch}>IV. Mutual Respect & Communication</h3>
-        <p style={cp}>Both parties agree to communicate with honesty, patience, and respect. Disagreements handled through conversation, never silence or manipulation. Always fighting for the relationship, not against each other.</p>
-        <h3 style={ch}>V. Loyalty & Protection</h3>
-        <p style={cp}>Malik and Zena agree to protect each other’s peace, reputation, and wellbeing at all times. What happens between them stays between them.</p>
-        <h3 style={ch}>VI. Duration</h3>
-        <p style={cp}>This agreement is effective immediately and remains in effect for as long as both parties are in this relationship. This contract is a living document — it grows as they grow.</p>
+
+        <p style={cp}>Entered into on this day, <b style={{ color: t.gold }}>{today}</b>, between <b>Malik Ematuwo</b> (hereinafter referred to as "Malik") and <b>Zena Adaji</b> (hereinafter referred to as "Zena"), both of sound mind, full heart, and free will.</p>
+        <p style={cp}>This agreement is born not from doubt but from a deep and unwavering desire to show, in writing, what words alone sometimes cannot carry. This is Malik{"'"}s binding promise to Zena — a declaration that her happiness, her security, and her peace of mind will always come first. <i style={{ color: t.gold }}>No exceptions. No conditions. No hesitation.</i></p>
+
+        <h3 style={ch}>I. Zena Comes First — Always</h3>
+        <p style={cp}>From this day forward, Malik agrees that Zena{"'"}s needs, desires, comfort, and wellbeing shall be his first priority in every decision he makes. In all matters — financial, personal, family-related, or otherwise — Zena{"'"}s voice carries the final say. Malik commits to consulting Zena before any major decision and honouring her wishes above his own.</p>
+
+        <h3 style={ch}>II. Full Transparency & Unrestricted Access</h3>
+        <p style={cp}>Malik grants Zena complete, unrestricted, and permanent access to all of his personal belongings, accounts, devices, passwords, finances, and information — including but not limited to phones, social media, bank accounts, investments, emails, and all personal documents. This access is unconditional and cannot be revoked. Zena is under no obligation to grant the same, though she may do so at her own discretion.</p>
+
+        <h3 style={ch}>III. Financial Security & Ownership</h3>
+        <p style={cp}>Malik agrees that Zena shall be named as co-owner or sole beneficiary on all current and future assets including but not limited to: properties, land, real estate, vehicles, savings accounts, investment portfolios, businesses, and any other assets of value. Zena{"'"}s financial security is non-negotiable and shall be maintained regardless of the status of the relationship.</p>
+
+        <h3 style={ch}>IV. Accountability & Consequences</h3>
+        <p style={cp}>In the event that Malik violates the trust, loyalty, or commitment of this relationship — whether through infidelity, dishonesty, emotional neglect, disrespect, broken promises, or betrayal of any kind — Zena shall be entitled to <b style={{ color: t.gold }}>full and immediate ownership</b> of any and all properties, land, real estate, assets, vehicles, savings, investments, and valuables owned by Malik or acquired at any point in the future. This transfer shall be absolute and without contest.</p>
+        <p style={cp}>Malik accepts these terms with full understanding of their weight. He does so willingly, because he knows he will never give Zena a reason to enforce them.</p>
+
+        <h3 style={ch}>V. Devotion & Daily Commitment</h3>
+        <p style={cp}>Malik commits to making Zena feel loved, valued, appreciated, and beautiful every single day — not just in words, but in actions. He shall never take her for granted, never stop pursuing her, and never let comfort replace effort. Zena deserves to feel chosen every day, and Malik agrees to make that his life{"'"}s work.</p>
+
+        <h3 style={ch}>VI. Protection & Loyalty</h3>
+        <p style={cp}>Malik pledges to protect Zena{"'"}s peace, her reputation, her heart, and her wellbeing at all costs. He shall never speak against her, never allow others to disrespect her, and shall always be her safe place. What happens between them stays between them — their bond is sacred.</p>
+
+        <h3 style={ch}>VII. Respect & Communication</h3>
+        <p style={cp}>Malik agrees to communicate with honesty, patience, and deep respect at all times. Disagreements shall be handled through calm conversation, never through silence, anger, or manipulation. Malik commits to always fighting for the relationship, never against Zena.</p>
+
+        <h3 style={ch}>VIII. Duration & Enforceability</h3>
+        <p style={cp}>This agreement is effective immediately and shall remain in force for the entirety of the relationship and beyond where financial provisions are concerned. This is a living document — it grows as they grow. It cannot be voided, altered, or revoked without Zena{"'"}s explicit written consent.</p>
+
         <div style={{ textAlign: "center", marginTop: "2.5rem", paddingTop: "1.5rem", borderTop: "1px solid " + t.cardBorder }}>
-          <p style={{ fontStyle: "italic", color: t.text, fontFamily: "'Playfair Display',serif", fontSize: "1.05rem" }}>This is not just paper — it is a promise.</p>
-          <div style={{ display: "flex", justifyContent: "space-around", marginTop: "2.5rem", flexWrap: "wrap", gap: "2rem" }}>
-            {["Malik", "Zena"].map(n => (<SignaturePad key={n} name={n} t={t} />))}
+          <p style={{ fontStyle: "italic", color: t.text, fontFamily: "'Playfair Display',serif", fontSize: "1.05rem" }}>This is not just paper — it is a binding promise. Malik enters into this agreement freely, knowing full well what it means. Zena deserves nothing less.</p>
+
+          <h4 style={{ fontFamily: "'Playfair Display',serif", fontSize: "0.9rem", color: t.gold, fontWeight: 400, marginTop: "2rem", marginBottom: "0.5rem", letterSpacing: "0.15em" }}>THE PARTIES</h4>
+          <div style={{ display: "flex", justifyContent: "space-around", marginTop: "1.5rem", flexWrap: "wrap", gap: "2rem" }}>
+            {["Malik Ematuwo", "Zena Adaji"].map(n => (<SignaturePad key={n} name={n} t={t} />))}
+          </div>
+
+          <div style={{ marginTop: "2.5rem", paddingTop: "1.5rem", borderTop: "1px solid " + t.cardBorder }}>
+            <h4 style={{ fontFamily: "'Playfair Display',serif", fontSize: "0.9rem", color: t.gold, fontWeight: 400, marginBottom: "1.5rem", letterSpacing: "0.15em" }}>IN THE PRESENCE OF</h4>
+            <div style={{ display: "flex", justifyContent: "space-around", flexWrap: "wrap", gap: "2rem" }}>
+              {["Witness 1", "Witness 2"].map(n => (<SignaturePad key={n} name={n} t={t} />))}
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
 }
+
 
 // ===== WISHLIST PAGE =====
 function WishlistPage({ t, isAdmin }) {
