@@ -533,8 +533,28 @@ function DailyLovePage({ t, isAdmin }) {
   const generateQuote = async (prompt) => {
     setLoading(true);
     try {
-      const sysPrompt = "You are writing as Malik to his girlfriend Zena. Write a deeply personal, heartfelt love message. Keep it between 2-4 sentences. Make it feel raw, honest, and real — not generic. Reference things like: wanting to build a life together, admiring her beauty and strength, traveling the world together, being her protector, giving her everything she deserves, how she makes ordinary moments special. Never use cliches. Write like a real person deeply in love. Just output the quote, nothing else.";
-      const userPrompt = prompt || "Write today’s love message from Malik to Zena. Make it unique and deeply personal.";
+      const moods = ["passionate and intense", "soft and tender", "playful and flirty", "poetic and deep", "confident and protective", "vulnerable and honest", "nostalgic and reflective", "ambitious and dreamy", "grateful and adoring", "sensual and romantic"];
+      const angles = [
+        "how her smile changes the energy of a room",
+        "a specific small moment that made him fall deeper",
+        "what he wants their future to look like in detail",
+        "how she makes him want to be a better man",
+        "what he would tell her if words could capture everything",
+        "how she looks when she does not know he is watching",
+        "a promise about their next adventure together",
+        "why she is different from everyone he has ever known",
+        "what her voice does to him after a long day",
+        "the little things she does that she does not realise drive him crazy",
+        "how proud he is to be hers",
+        "what he would sacrifice without thinking twice",
+        "how she turned his world from black and white to colour",
+        "the way she challenges him and makes him grow",
+        "a love letter written at 3am when he cannot sleep thinking about her"
+      ];
+      const mood = moods[Math.floor(Math.random() * moods.length)];
+      const angle = angles[Math.floor(Math.random() * angles.length)];
+      const sysPrompt = "You are Malik, a young ambitious man deeply in love with his girlfriend Zena. You are real, raw, and expressive. You do not write like a greeting card. You write like a man who genuinely cannot believe how lucky he is. Your tone right now is " + mood + ". Write 2-4 sentences. NEVER start with the words Every day or You are. NEVER use the words journey, beacon, tapestry, cherish. Be specific, vivid, and surprising. Just output the message, nothing else.";
+      const userPrompt = prompt || "Write a love message from Malik to Zena. Focus on: " + angle + ". Make it completely unique, something she has never read before. Random seed: " + Date.now()
       const res = await fetch("https://api.anthropic.com/v1/messages", {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ model: "claude-sonnet-4-20250514", max_tokens: 300, system: sysPrompt, messages: [{ role: "user", content: userPrompt }] })
