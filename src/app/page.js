@@ -539,33 +539,31 @@ function DailyLovePage({ t, isAdmin }) {
         "a specific small moment that made him fall deeper",
         "what he wants their future to look like in detail",
         "how she makes him want to be a better man",
-        "what he would tell her if words could capture everything",
         "how she looks when she does not know he is watching",
         "a promise about their next adventure together",
         "why she is different from everyone he has ever known",
         "what her voice does to him after a long day",
-        "the little things she does that she does not realise drive him crazy",
+        "the little things she does that drive him crazy",
         "how proud he is to be hers",
-        "what he would sacrifice without thinking twice",
         "how she turned his world from black and white to colour",
         "the way she challenges him and makes him grow",
-        "a love letter written at 3am when he cannot sleep thinking about her"
+        "a love letter written at 3am thinking about her"
       ];
       const mood = moods[Math.floor(Math.random() * moods.length)];
       const angle = angles[Math.floor(Math.random() * angles.length)];
-      const sysPrompt = "You are Malik, a young ambitious man deeply in love with his girlfriend Zena. You are real, raw, and expressive. You do not write like a greeting card. You write like a man who genuinely cannot believe how lucky he is. Your tone right now is " + mood + ". Write 2-4 sentences. NEVER start with the words Every day or You are. NEVER use the words journey, beacon, tapestry, cherish. Be specific, vivid, and surprising. Just output the message, nothing else.";
-      const userPrompt = prompt || "Write a love message from Malik to Zena. Focus on: " + angle + ". Make it completely unique, something she has never read before. Random seed: " + Date.now()
+      const sysPrompt = "You are Malik, a young ambitious man deeply in love with his girlfriend Zena. You MUST use her name Zena at least once in every message. You are real, raw, and expressive. You do not write like a greeting card. You write like a man who genuinely cannot believe how lucky he is. Your tone right now is " + mood + ". Write 2-4 sentences. NEVER start with Every day or You are or I love. NEVER use the words journey, beacon, tapestry, cherish, soulmate, destiny. Be specific, vivid, and surprising. Just output the message, nothing else.";
+      const userPrompt = prompt || "Write a love message from Malik to Zena. Focus on: " + angle + ". Make it completely unique. Seed: " + Date.now() + "_" + Math.random().toString(36).slice(2);
       const res = await fetch("https://api.anthropic.com/v1/messages", {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ model: "claude-sonnet-4-20250514", max_tokens: 300, system: sysPrompt, messages: [{ role: "user", content: userPrompt }] })
       });
       const data = await res.json();
-      const text = data.content?.map(c => c.text || "").join("") || "Every day with you is another reason I know I made the right choice.";
+      const text = data.content?.map(c => c.text || "").join("") || "Zena, every single day I wake up knowing I have the most incredible woman by my side.";
       const newQuote = { text, date: new Date().toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" }), time: new Date().toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" }) };
       setQuote(newQuote);
       await addQuote(newQuote);
     } catch (e) {
-      const fallback = { text: "Zena, every single day I wake up knowing I have the most incredible woman by my side. You make me want to be better, do better, and give you everything this world has to offer.", date: new Date().toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" }), time: new Date().toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" }) };
+      const fallback = { text: "Zena, every single day I wake up knowing I have the most incredible woman by my side. You make everything make sense.", date: new Date().toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" }), time: new Date().toLocaleTimeString("en-US", { hour: "2-digit", minute: "2-digit" }) };
       setQuote(fallback);
       await addQuote(fallback);
     }
@@ -594,10 +592,10 @@ function DailyLovePage({ t, isAdmin }) {
 
       <div style={{ display: "flex", flexDirection: "column", gap: "0.8rem", marginBottom: "2.5rem" }}>
         <button onClick={() => generateQuote()} disabled={loading} style={{ padding: "14px 24px", background: loading ? t.gold + "40" : t.gold, color: "#0a0a0a", border: "none", borderRadius: 8, cursor: loading ? "wait" : "pointer", fontFamily: "'Cormorant Garamond',serif", fontSize: "1.1rem", fontWeight: 600, letterSpacing: "0.08em" }}>
-          {loading ? "Writing from the heart..." : "✨ Generate Today’s Love Quote"}
+          {loading ? "Writing from the heart..." : "✨ Write Zena a Love Message"}
         </button>
         <div style={{ display: "flex", gap: 6 }}>
-          {["How much I admire her", "Our future together", "How beautiful she is", "How she changed my life"].map((topic, i) => (
+          {["Why Zena is everything", "Our future together", "How beautiful Zena is", "How Zena changed my life", "Make Zena smile", "Tell Zena goodnight"].map((topic, i) => (
             <button key={i} onClick={() => generateQuote("Write a love message from Malik to Zena specifically about: " + topic)} disabled={loading} style={{ flex: 1, padding: "8px 4px", background: t.inputBg, border: "1px solid " + t.inputBorder, borderRadius: 6, color: t.gold, cursor: "pointer", fontSize: "0.7rem", fontFamily: "'Cormorant Garamond',serif" }}>{topic}</button>
           ))}
         </div>
